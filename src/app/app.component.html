@@ -1,0 +1,9 @@
+<ng-container *ngIf="profile !== undefined">
+    <app-sidebar></app-sidebar>
+    <app-header-component></app-header-component>
+    <div style="height: 60px;"></div>
+    <router-outlet></router-outlet>
+    <app-popup></app-popup>
+    <app-notification></app-notification>
+
+</ng-container>

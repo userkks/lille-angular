@@ -1,0 +1,40 @@
+<div *ngIf="componentInitialized">
+    <div style="height: 20px;"></div>
+    <div class="search-product-main-section">
+        <div style="font-size: 16px;" class="font-2">{{productDetailsList.length === 0 ? 'No' : productDetailsList.length}}
+            result found for "{{keyword}}"</div>
+        <div style="height: 5px;"></div>
+        <div style="border-bottom:1px solid grey;"></div>
+        <div style="height: 30px"></div>
+        <div style="width:95%; margin: 0% auto">
+            <div style="display:flex;flex-wrap: wrap;justify-content: space-around;">
+                <a *ngFor="let item of productDetailsList" [routerLink]="['/product', item.productUrlTitle, item._id]"
+                    class="search-product-item">
+                    <div class="search-page-item-image-wrapper container-box">
+                        <img src="{{item.productImageList[0]}}" alt="Product Image">
+                    </div>
+                    <div style="height: 20px;"></div>
+                    <div>
+                        <div style="height: 7px;"></div>
+                        <div class="font-2">{{item.mainName}}</div>
+                        <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" class="font-0">
+                            {{item.oneLineDescription}}</div>
+                        <div style="height: 5px;"></div>
+                        <div style="justify-content: flex-start;" class="container-box">
+                            <div style="text-decoration: line-through;" class="font-1">&#8377;{{item.grossPrice}}</div>
+                            <div style="width:10px;"></div>
+                            <div class="discount-box font-3">{{item.discount}}% off</div>
+                        </div>
+                        <div style="height: 5px;"></div>
+                        <div style="font-size: 18px;font-weight: bold;" class="font-3">&#8377;{{item.actualPrice}} <span
+                                class="font-1">+ Free Delivery</span></div>
+                        <div style="height: 5px;"></div>
+                        <div style="font-size:13px;" class="font-0">{{item.uniqueSingleSpec.specName}}:
+                            {{item.uniqueSingleSpec.specValue}}</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<app-page-loading *ngIf="!componentInitialized"></app-page-loading>

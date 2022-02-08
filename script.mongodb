@@ -1,0 +1,29 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('projectDb');
+
+db.blogposts.insertOne({
+    "title": "simplifying-api-development-with-lille",
+  "header": "Simplifying API development with Lille",
+  "mainImage": "../../../assets/illust 2.png",
+  "gistLine": "Do you want your API creation as easy as filling a form in the internet. Here we come with Lille, an all in one ...",
+  "content": [
+    {
+      "paragraph": "Do you want your API creation as easy as filling a form in the internet. Here we come with Lille, an all in one solution to your backend development. No need of prior knowledge of coding, with Lille we abstract away all the complexity of API development to deployment, so that you can focus on other major part of your business."
+    },
+    {
+      "paragraph": "So you want to setup your e-commerce portal or build a user experience, no need to concern over your backend implementation, no need to hire developer for that anymore, our in built interface is so user friendly that, only you need to know your api configuration, and the data that you want that api to return, leave rest of the implementation with us. With 99.999% uptime and less than 0.5 sec of response time, we take care all the need of backend deployment. All of our services are completely <b>FREE</b> of cost, Use it as you want."
+    },
+    {
+      "image": "../../../assets/illust 2.png",
+      "description": ""
+    },
+    {
+      "paragraph": "As a e-commerce portal owner now you only need to focus on the detils of the product that you want to show on the User Interface and the corresponding unique key that you want to use to fetch the product details. Fill the details on our interface, hit <b>Create API</b> button and you are <b><i>DONE!!</i></b>. Now you can access the api from anywhere and from any web application. Use it for your purpose. Hope to see some amazing application on the other side powered by Lille."
+    }
+  ]
+  });

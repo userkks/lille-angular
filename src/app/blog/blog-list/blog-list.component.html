@@ -1,0 +1,23 @@
+<div style="height: 40px;"></div>
+<div class="full-width container-box">
+    <div class="blog-list-container">
+        <div class="front-main-bold">Lille Blog</div>
+        <div style="height: 20px"></div>
+        <div class="full-width" style="display: flex; flex-wrap: wrap; justify-content: center;">
+            <div *ngFor="let item of postList" class="blog-list-item">
+                <div>
+                    <a [routerLink]="[item.title]">
+                        <div class="full-width container-box" style="height: 150px;">
+                            <img [src]="item.mainImage" alt="blog image">
+                        </div>
+                        <div class="full-width blog-text-section">
+                            <div class="light-color">Lille</div>
+                            <h4 style="margin: 5px 0px;">{{item.header}}</h4>
+                            <div class="light-color">{{item.gistLine}}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

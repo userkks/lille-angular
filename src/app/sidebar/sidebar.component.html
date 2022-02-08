@@ -1,0 +1,20 @@
+<div #sidebar class="sidebar-content">
+    <div style="height: 150px;"></div>
+    <div class="align-center full-width">
+        <div style="font-size: 20px; margin-bottom: 15px;" *ngIf="profileObject">Hi, {{profileObject.name.split(' ')[0]}}</div>
+        <a [routerLink]="['home']">
+            <button (click)="closeSidebar()" class="sidebar-button">Home</button>
+        </a>
+        <a [routerLink]="['blog']">
+            <button (click)="closeSidebar()" class="sidebar-button">Blog</button>
+        </a>
+        <a *ngIf="!profileObject" [routerLink]="['login']">
+            <button (click)="closeSidebar()" class="sidebar-button">Login</button>
+        </a>
+        <a *ngIf="profileObject" [routerLink]="['dashboard']">
+            <button (click)="closeSidebar()" class="sidebar-button">My Dashboard</button>
+        </a>
+        <button *ngIf="profileObject" (click)="logoutSession();closeSidebar()" class="sidebar-button">Logout</button>
+    </div>
+</div>
+<div (click)="closeSidebar();" *ngIf="sidebarOpen" class="sidebar-background"></div>

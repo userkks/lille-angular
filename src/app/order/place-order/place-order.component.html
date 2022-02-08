@@ -1,0 +1,412 @@
+<app-page-loading *ngIf="!componentLoaded"></app-page-loading>
+<div *ngIf="componentLoaded">
+    <div style="width:90%;margin:0% auto;">
+        <div style="height: 30px"></div>
+        <div style="font-size: 18px;" class="font-2">Order Confirmation</div>
+        <div style="height: 5px;"></div>
+        <div style="border-bottom: 1px solid lightgray;"></div>
+        <div style="height: 30px"></div>
+        <div style="width: 90%;margin: 0% auto;">
+            <div *ngIf="desktopScreen" style="display: flex;flex-wrap: wrap;justify-content: space-between;">
+
+                <div *ngIf="oneProductToCheckout" class="order-page-item-details">
+                    <div class="container-box order-page-item-image-container">
+                        <img src="{{productDetailsList[0].productImageList[0]}}" alt="product image">
+                    </div>
+                    <div class="order-page-item-specs-container">
+                        <div class="font-2">{{productDetailsList[0].mainName}}</div>
+                        <div style="text-transform: capitalize;" class="three-dot-line font-0">
+                            {{productDetailsList[0].oneLineDescription}}</div>
+                        <div style="height: 5px;"></div>
+                        <div class="same-line">
+                            <div style="text-decoration: line-through;font-size: 15px;" class="font-1">
+                                &#8377;{{productDetailsList[0].grossPrice}}
+                            </div>
+                            <div style="width: 7px;"></div>
+                            <div class="discount-box font-3">{{productDetailsList[0].discount}}% off</div>
+                        </div>
+                        <div style="height: 15px;"></div>
+                        <div style="font-size: 14px;" class="font-1">
+                            <div *ngIf="productDetailsList[0].selectedSize">
+                                <div>{{productDetailsList[0].classificationName}} :
+                                    {{productDetailsList[0].selectedSize}}</div>
+                            </div>
+                            <div style="height: 3px;"></div>
+                            <div>{{productDetailsList[0].productSpecificationList[0].specName}} :
+                                {{productDetailsList[0].productSpecificationList[0].specValue}}</div>
+                        </div>
+                        <div style="height: 20px;"></div>
+                        <div class="same-line">
+                            <div class="order-page-amount">&#8377;{{productDetailsList[0].actualPrice}}</div>
+                            <div style="width: 5px;"></div>
+                            <div>+ Free Delivery</div>
+                        </div>
+                        <div style="height: 15px;"></div>
+                        <div class="order-page-billing-box">
+                            <div style="justify-content: space-between;" class="same-line">
+                                <div>Quantity</div>
+                                <div>1 item</div>
+                            </div>
+                            <div style="justify-content: space-between;" class="same-line">
+                                <div>Total Price</div>
+                                <div>&#8377;{{productDetailsList[0].actualPrice}}</div>
+                            </div>
+                            <div style="justify-content: space-between;" class="same-line">
+                                <div>Delivery Charges</div>
+                                <div>Free</div>
+                            </div>
+                            <div style="border-bottom: 1px dashed rgb(100,100,100);height: 7px;"></div>
+                            <div style="justify-content: space-between;" class="same-line">
+                                <div>Total</div>
+                                <div>&#8377; {{productDetailsList[0].actualPrice}}</div>
+                            </div>
+                        </div>
+                        <div class="order-page-continue-button">
+                            <button class="cart-checkout-button font-2">
+                                <div class="same-line">
+                                    <div style="width: 30px;">
+                                        <img src="/assets/shopping-cart-white-shape.svg" alt="shopping bag icon">
+                                    </div>
+                                    <div style="width: 10px;"></div>
+                                    <div style="font-size: 16px;">Continue</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!oneProductToCheckout" class="order-page-more-item-details">
+                    <div class="mob-order-page-more-item-total-wrapper">
+                        <div style="display: flex;align-items: center;font-size: 17px;flex-direction: column;"
+                            class="font-3">
+                            <div>Total Amount</div>
+                            <div>&#8377;{{cartTotalAmount}}</div>
+                        </div>
+                        <button class="cart-checkout-button font-2">
+                            <div class="same-line">
+                                <div style="width: 30px;">
+                                    <img src="/assets/shopping-cart-white-shape.svg" alt="shopping bag icon">
+                                </div>
+                                <div style="width: 10px;"></div>
+                                <div style="font-size: 16px;">Continue</div>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="order-page-more-item-billing-box">
+                        <div class="order-page-more-item-billing-item container-box">
+                            <div>Quantity</div>
+                            <div>{{productDetailsList.length}} Items</div>
+                        </div>
+                        <div class="order-page-more-item-billing-item container-box">
+                            <div>Total Price</div>
+                            <div>&#8377; {{cartTotalAmount}}</div>
+                        </div>
+                        <div class="order-page-more-item-billing-item container-box">
+                            <div>Delivery Charges</div>
+                            <div>Free</div>
+                        </div>
+                        <div style="border-bottom: 1px dashed rgb(100,100,100);margin: 7px 0px;"></div>
+                        <div style="justify-content: space-between;margin-bottom: 5px;" class="container-box">
+                            <div style="font-size: 16px;" class="font-2">Total</div>
+                            <div style="font-size: 16px;" class="font-2">&#8377; {{cartTotalAmount}}</div>
+                        </div>
+                    </div>
+                    <div style="height: 10px;"></div>
+                    <div style="height: 350px;overflow:auto;">
+                        <div *ngFor="let item of productDetailsList" class="order-page-more-item-each-order same-line">
+                            <div style="width: 100px;height: 150px;">
+                                <img src={{item.productImageList[0]}} alt="">
+                            </div>
+                            <div style="width: 20px;"></div>
+                            <div style="width: 70%">
+                                <div class="font-2">{{item.mainName}}</div>
+                                <div style="text-transform: capitalize;" class="three-dot-line font-0">
+                                    {{item.oneLineDescription}}</div>
+                                <div style="height: 5px;"></div>
+                                <div class="same-line">
+                                    <div style="font-size: 20px;" class="font-3">&#8377;{{item.actualPrice}}</div>
+                                    <div style="width: 7px;"></div>
+                                    <div style="text-decoration: line-through;font-size: 15px;" class="font-1">
+                                        &#8377;{{item.grossPrice}}
+                                    </div>
+                                    <div style="width: 7px;"></div>
+                                    <div class="discount-box font-3">{{item.discount}}% off</div>
+                                </div>
+                                <div style="height: 15px;"></div>
+                                <div style="font-size: 14px;" class="font-1">
+                                    <div *ngIf="item.selectedSize">
+                                        <div>{{item.classificationName}} : {{item.selectedSize}}</div>
+                                    </div>
+                                    <div style="height: 3px;"></div>
+                                    <div>{{item.productSpecificationList[0].specName}} :
+                                        {{item.productSpecificationList[0].specValue}}</div>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <div style="color: green;font-size: 14px;">Delivery By {{item.deliveryDate | date :
+                                    'EEEE, MMMM d'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-page-address-section">
+                    <form [formGroup]="placeOrderForm" (ngSubmit)="placeOrder()">
+                        <div style="font-size: large;" class="font-2">Contact Information</div>
+                        <div style="height: 15px;"></div>
+                        <input [ngClass]="{'error-input-field': inputErrorCheck('emailField')}"
+                            formControlName="emailField" class="custom-input-field order-form-input-field" type="text"
+                            placeholder="Email*">
+                        <div class="same-line">
+                            <div style="width: 10px;"></div>
+                            <input formControlName="checkMailOffers" type="checkbox">
+                            <div style="width: 10px;"></div>
+                            <div style="color: #43a047;font-weight: bold;" class="font-1">Keep me up to date with news
+                                and
+                                other offers.</div>
+                        </div>
+                        <div style="height: 20px;"></div>
+                        <div style="font-size: large;" class="font-2">Shipping Address</div>
+                        <div style="height: 15px;"></div>
+                        <div style="width: 100%;" class="same-line">
+                            <input [ngClass]="{'error-input-field': inputErrorCheck('firstName')}"
+                                formControlName="firstName" style="width: 48%;"
+                                class="custom-input-field order-form-input-field" type="text" placeholder="First Name*">
+                            <div style="width: 4%;"></div>
+                            <input [ngClass]="{'error-input-field': inputErrorCheck('lastName')}"
+                                formControlName="lastName" style="width: 48%;"
+                                class="custom-input-field order-form-input-field" type="text" placeholder="Last Name*">
+                        </div>
+                        <input [ngClass]="{'error-input-field': inputErrorCheck('addressLine1')}"
+                            formControlName="addressLine1" type="text" class="custom-input-field order-form-input-field"
+                            placeholder="Address Line 1*">
+                        <input [ngClass]="{'error-input-field': inputErrorCheck('addressLine2')}"
+                            formControlName="addressLine2" type="text" class="custom-input-field order-form-input-field"
+                            placeholder="Address Line 2">
+                        <div class="same-line">
+                            <input [ngClass]="{'error-input-field': inputErrorCheck('city')}" formControlName="city"
+                                style="width: 31%;" type="text" class="custom-input-field order-form-input-field"
+                                placeholder="City*">
+                            <div style="width: 3.5%;"></div>
+                            <ng-select [ngClass]="{'error-ng-select': inputErrorCheck('state')}"
+                                formControlName="state" style="margin-bottom: 10px;width: 31%;" [searchable]="false"
+                                [clearable]="false" [placeholder]="'Select State*'" [items]="stateList"></ng-select>
+                            <div style="width: 3.5%;"></div>
+                            <input [ngClass]="{'error-input-field': inputErrorCheck('pinCode')}" formControlName="pinCode" style="width: 31%;" type="text"
+                                class="custom-input-field order-form-input-field" placeholder="Pin Code*">
+                        </div>
+                        <input [ngClass]="{'error-input-field': inputErrorCheck('phoneNumber')}" formControlName="phoneNumber" type="text"
+                            class="custom-input-field order-form-input-field" placeholder="Phone Number*">
+                        <div style="display: flex;justify-content: flex-start;">
+                            <button type="submit" style="padding: 5px 40px;"
+                                class="cart-checkout-button font-2">
+                                <div class="same-line">
+                                    <div style="width: 30px;">
+                                        <img src="/assets/shopping-cart-white-shape.svg" alt="cart image">
+                                    </div>
+                                    <div style="width: 8px;"></div>
+                                    <div>Place Order</div>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div *ngIf="!desktopScreen" style="display: flex;flex-wrap: wrap;justify-content: space-between;">
+
+                <div *ngIf="oneProductToCheckout && !mobileContinueClicked" class="order-page-item-details">
+                    <div class="container-box order-page-item-image-container">
+                        <img src="{{productDetailsList[0].productImageList[0]}}" alt="product image">
+                    </div>
+                    <div class="order-page-item-specs-container">
+                        <div class="font-2">{{productDetailsList[0].mainName}}</div>
+                        <div style="text-transform: capitalize;" class="three-dot-line font-0">
+                            {{productDetailsList[0].oneLineDescription}}</div>
+                        <div style="height: 5px;"></div>
+                        <div class="same-line">
+                            <div style="text-decoration: line-through;font-size: 15px;" class="font-1">
+                                &#8377;{{productDetailsList[0].grossPrice}}
+                            </div>
+                            <div style="width: 7px;"></div>
+                            <div class="discount-box font-3">{{productDetailsList[0].discount}}% off</div>
+                        </div>
+                        <div style="height: 15px;"></div>
+                        <div style="font-size: 14px;" class="font-1">
+                            <div *ngIf="productDetailsList[0].selectedSize">
+                                <div>{{productDetailsList[0].classificationName}} :
+                                    {{productDetailsList[0].selectedSize}}</div>
+                            </div>
+                            <div style="height: 3px;"></div>
+                            <div>{{productDetailsList[0].productSpecificationList[0].specName}} :
+                                {{productDetailsList[0].productSpecificationList[0].specValue}}</div>
+                        </div>
+                        <div style="height: 20px;"></div>
+                        <div class="same-line">
+                            <div class="order-page-amount">&#8377;{{productDetailsList[0].actualPrice}}</div>
+                            <div style="width: 5px;"></div>
+                            <div>+ Free Delivery</div>
+                        </div>
+                        <div style="height: 15px;"></div>
+                        <div class="order-page-billing-box">
+                            <div style="justify-content: space-between;" class="same-line">
+                                <div>Quantity</div>
+                                <div>1 item</div>
+                            </div>
+                            <div style="justify-content: space-between;" class="same-line">
+                                <div>Total Price</div>
+                                <div>&#8377;{{productDetailsList[0].actualPrice}}</div>
+                            </div>
+                            <div style="justify-content: space-between;" class="same-line">
+                                <div>Delivery Charges</div>
+                                <div>Free</div>
+                            </div>
+                            <div style="border-bottom: 1px dashed rgb(100,100,100);height: 7px;"></div>
+                            <div style="justify-content: space-between;" class="same-line">
+                                <div>Total</div>
+                                <div>&#8377; {{productDetailsList[0].actualPrice}}</div>
+                            </div>
+                        </div>
+                        <div class="order-page-continue-button">
+                            <button (click)="mobileContinueButtonClick()" class="cart-checkout-button font-2">
+                                <div class="same-line">
+                                    <div style="width: 30px;">
+                                        <img src="/assets/shopping-cart-white-shape.svg" alt="shopping bag icon">
+                                    </div>
+                                    <div style="width: 10px;"></div>
+                                    <div style="font-size: 16px;">Continue</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!oneProductToCheckout && !mobileContinueClicked" class="order-page-more-item-details">
+                    <div class="mob-order-page-more-item-total-wrapper">
+                        <div style="display: flex;align-items: center;font-size: 17px;flex-direction: column;"
+                            class="font-3">
+                            <div>Total Amount</div>
+                            <div>&#8377;{{cartTotalAmount}}</div>
+                        </div>
+                        <button (click)="mobileContinueButtonClick()" class="cart-checkout-button font-2">
+                            <div class="same-line">
+                                <div style="width: 30px;">
+                                    <img src="/assets/shopping-cart-white-shape.svg" alt="shopping bag icon">
+                                </div>
+                                <div style="width: 10px;"></div>
+                                <div style="font-size: 16px;">Continue</div>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="order-page-more-item-billing-box">
+                        <div class="order-page-more-item-billing-item container-box">
+                            <div>Quantity</div>
+                            <div>{{productDetailsList.length}} Items</div>
+                        </div>
+                        <div class="order-page-more-item-billing-item container-box">
+                            <div>Total Price</div>
+                            <div>&#8377; {{cartTotalAmount}}</div>
+                        </div>
+                        <div class="order-page-more-item-billing-item container-box">
+                            <div>Delivery Charges</div>
+                            <div>Free</div>
+                        </div>
+                        <div style="border-bottom: 1px dashed rgb(100,100,100);margin: 7px 0px;"></div>
+                        <div style="justify-content: space-between;margin-bottom: 5px;" class="container-box">
+                            <div style="font-size: 16px;" class="font-2">Total</div>
+                            <div style="font-size: 16px;" class="font-2">&#8377; {{cartTotalAmount}}</div>
+                        </div>
+                    </div>
+                    <div style="height: 10px;"></div>
+                    <div style="height: 350px;overflow:auto;">
+                        <div *ngFor="let item of productDetailsList" class="order-page-more-item-each-order same-line">
+                            <div style="width: 100px;height: 150px;">
+                                <img src={{item.productImageList[0]}} alt="">
+                            </div>
+                            <div style="width: 20px;"></div>
+                            <div style="width: 70%">
+                                <div class="font-2">{{item.mainName}}</div>
+                                <div style="text-transform: capitalize;" class="three-dot-line font-0">
+                                    {{item.oneLineDescription}}</div>
+                                <div style="height: 5px;"></div>
+                                <div class="same-line">
+                                    <div style="font-size: 20px;" class="font-3">&#8377;{{item.actualPrice}}</div>
+                                    <div style="width: 7px;"></div>
+                                    <div style="text-decoration: line-through;font-size: 15px;" class="font-1">
+                                        &#8377;{{item.grossPrice}}
+                                    </div>
+                                    <div style="width: 7px;"></div>
+                                    <div class="discount-box font-3">{{item.discount}}% off</div>
+                                </div>
+                                <div style="height: 15px;"></div>
+                                <div style="font-size: 14px;" class="font-1">
+                                    <div *ngIf="item.selectedSize">
+                                        <div>{{item.classificationName}} : {{item.selectedSize}}</div>
+                                    </div>
+                                    <div style="height: 3px;"></div>
+                                    <div>{{item.productSpecificationList[0].specName}} :
+                                        {{item.productSpecificationList[0].specValue}}</div>
+                                </div>
+                                <div style="height: 5px;"></div>
+                                <div style="color: green;font-size: 14px;">Delivery By {{item.deliveryDate | date :
+                                    'EEEE, MMMM d'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="mobileContinueClicked" style="display: block;width: 100%;"
+                    class="order-page-address-section">
+                    <form [formGroup]="placeOrderForm" (ngSubmit)="placeOrder()">
+                        <div style="font-size: large;" class="font-2">Contact Information</div>
+                        <div style="height: 15px;"></div>
+                        <input [ngClass]="{'error-input-field': inputErrorCheck('emailField')}" formControlName="emailField" class="custom-input-field order-form-input-field"
+                            type="text" placeholder="Email*">
+                        <div class="same-line">
+                            <div style="width: 10px;"></div>
+                            <input formControlName="checkMailOffers" type="checkbox">
+                            <div style="width: 10px;"></div>
+                            <div style="color: #43a047;font-weight: bold;" class="font-1">Keep me up to date with news
+                                and
+                                other offers.</div>
+                        </div>
+                        <div style="height: 20px;"></div>
+                        <div style="font-size: large;" class="font-2">Shipping Address</div>
+                        <div style="height: 15px;"></div>
+                        <div style="width: 100%;" class="same-line">
+                            <input [ngClass]="{'error-input-field': inputErrorCheck('firstName')}" formControlName="firstName" style="width: 48%;"
+                                class="custom-input-field order-form-input-field" type="text" placeholder="First Name*">
+                            <div style="width: 4%;"></div>
+                            <input [ngClass]="{'error-input-field': inputErrorCheck('lastName')}" formControlName="lastName" style="width: 48%;"
+                                class="custom-input-field order-form-input-field" type="text" placeholder="Last Name*">
+                        </div>
+                        <input [ngClass]="{'error-input-field': inputErrorCheck('addressLine1')}" formControlName="addressLine1" type="text"
+                            class="custom-input-field order-form-input-field" placeholder="Address Line 1*">
+                        <input [ngClass]="{'error-input-field': inputErrorCheck('addressLine2')}" formControlName="addressLine2" type="text"
+                            class="custom-input-field order-form-input-field" placeholder="Address Line 2">
+                        <div class="same-line">
+                            <input [ngClass]="{'error-input-field': inputErrorCheck('city')}" formControlName="city" style="width: 31%;" type="text"
+                                class="custom-input-field order-form-input-field" placeholder="City*">
+                            <div style="width: 3.5%;"></div>
+                            <ng-select [ngClass]="{'error-ng-select': inputErrorCheck('state')}" formControlName="state" style="margin-bottom: 10px;width: 31%;"
+                                [searchable]="false" [clearable]="false" [placeholder]="'Select State*'"
+                                [items]="stateList"></ng-select>
+                            <div style="width: 3.5%;"></div>
+                            <input [ngClass]="{'error-input-field': inputErrorCheck('pinCode')}" formControlName="pinCode" style="width: 31%;" type="text"
+                                class="custom-input-field order-form-input-field" placeholder="Pin Code*">
+                        </div>
+                        <input [ngClass]="{'error-input-field': inputErrorCheck('phoneNumber')}" formControlName="phoneNumber" type="text"
+                            class="custom-input-field order-form-input-field" placeholder="Phone Number*">
+                        <div style="display: flex;justify-content: flex-start;">
+                            <button class="cart-checkout-button font-2">
+                                <div class="same-line">
+                                    <div style="width: 30px;">
+                                        <img src="/assets/shopping-cart-white-shape.svg" alt="cart image">
+                                    </div>
+                                    <div style="width: 8px;"></div>
+                                    <div>Place Order</div>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

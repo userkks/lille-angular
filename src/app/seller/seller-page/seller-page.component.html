@@ -1,0 +1,45 @@
+<div style="display: flex;">
+    <div class="container-box sellerIdContainer" style="width: 25%; min-width: 250px;position: fixed;"
+        [style.height.px]="viewportHeight">
+        <div class="seller-profile">
+            <div class="container-box seller-logo">
+                <img src="/assets/shop-image.jpg" alt="shop logo">
+            </div>
+            <div class="font-1" style="text-align: center;">Amit Shopping Store And Some Other Store That Mean Mango
+            </div>
+            <div style="height: 5px;"></div>
+            <div class="font-2 text-center" style="margin: 3px 0px;">Minabazar road, Pradhan Nagar, Haryana 6574231
+            </div>
+            <div>
+                <button class="btn">Open Shop Location</button>
+            </div>
+        </div>
+
+
+    </div>
+    <div [style.height.px]="viewportHeight" style="display: flex; align-items: center;position: fixed; left: 25%">
+        <div [style.height.px]="viewportHeight - 70" style="width:1px; background-color: #8ba3e2;"></div>
+    </div>
+    <div style="width: 25%;"></div>
+    <div class="ProductsList" style="width: 75%; display: flex;flex-direction: column;align-items: center;">
+        <div style="height: 30px;"></div>
+        <div class="seller-product-container">
+            <div *ngFor="let item of itemList" class="seller-each-product">
+                <div class="container-box" style="height: 200px;">
+                    <img src="/assets/product.jpg" alt="product graphic image">
+                </div>
+                <div style="height:5px;"></div>
+                <div class="font-2" style="text-align: center;">Surf Excel</div>
+                <div class="font-1" style="text-align: center;">Net Weight: 500gm</div>
+                <div class="container-box">
+                    <div style="text-decoration: line-through;" class="font-1">&#8377;101</div>
+                    <div style="width:10px;"></div>
+                    <div class="discount-box font-3">30% off</div>
+                </div>
+                <div style="font-size: 18px;font-weight: bold;text-align: center;" class="font-3">&#8377;90 <span class="font-1">+ Free
+                        Delivery</span></div>
+            </div>
+            
+        </div>
+    </div>
+</div>

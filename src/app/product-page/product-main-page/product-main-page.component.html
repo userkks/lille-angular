@@ -1,0 +1,227 @@
+<app-page-loading *ngIf="!pageLoaded"></app-page-loading>
+<ng-container *ngIf="pageLoaded">
+  <div style="height:20px"></div>
+  <div class="pin-product-details">
+    <div style="height: 40px;"></div>
+    <div style="display: flex;">
+      <div style="width:4.5%;"></div>
+      <div class="product-main-image-container">
+        <div style="height:380px;padding:10px;" class="container-box">
+          <img src="{{productImageCarouselItem[selectedMainImageIndex]}}" alt="">
+        </div>
+        <div style="height: 10px;"></div>
+        <div class="conatainer-box product-pic-carousel">
+          <owl-carousel-o [options]="productImageCarouselConfig">
+            <ng-container *ngFor="let item of productImageCarouselItem;let i = index;">
+              <ng-template carouselSlide>
+                <div (click)="changeMainPic(i)" [ngClass]="{'product-pic-selected': i===selectedMainImageIndex}"
+                  class="product-pic-item container-box">
+                  <img src="{{item}}" alt="">
+                </div>
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+        </div>
+      </div>
+      <div style="width: 4.5%;"></div>
+      <div class="product-details">
+        <div>
+          <div>
+            <div style="display: flex;">
+              <div style="display: flex;flex-direction: column;justify-content: space-between;height: 80px;">
+                <div style="font-size: 20px;" class="font-2">{{productDetails?.mainName}}</div>
+                <div style="justify-content: flex-start;" class="container-box">
+                  <div style="text-decoration: line-through;">&#8377;{{productDetails?.grossPrice}}</div>
+                  <div style="width: 10px;"></div>
+                  <div class="font-3 discount-box">
+                    {{productDetails?.discount}}% off
+                  </div>
+                </div>
+                <div style="justify-content: flex-start;" class="container-box">
+                  <div style="font-size: 25px;" class="font-3">&#8377;{{productDetails?.actualPrice}}</div>
+                  <div style="width: 10px;"></div>
+                  <div>Free Delivery</div>
+                </div>
+              </div>
+              <div (click)="clickWishlistButton();" style="align-items: flex-start;" class="container-box">
+                <img *ngIf="!productInWishList" title="Add to wishlist" class="wishlist-button"
+                  style="height:40px;width:50px;cursor:pointer;" src="/assets/wishlist-sign.svg" alt="">
+                <img *ngIf="productInWishList" title="Remove from wishlist" class="wishlist-button"
+                  style="height:40px;width:50px;cursor:pointer;" src="/assets/wishlist-added.svg" alt="">
+              </div>
+            </div>
+            <div style="height: 20px;"></div>
+            <div style="display: flex;">
+              <div style="width:30px;"></div>
+              <div style="width:300px;font-size: 14px;">
+                <ul class="font-1 product-bullets">
+                  <li *ngFor="let eachPoint of productDetails?.shortOneLinePoints">{{eachPoint}}</li>
+                </ul>
+              </div>
+            </div>
+            <div style="height: 25px;"></div>
+            <div class="font-1">Available from <span class="font-2 pointer underLineText">Amit Shopping Center</span></div>
+            <div style="height: 5px;"></div>
+            <div style="border: 1px solid #c7c7c7; width: min-content;padding: 10px;border-radius:5px;">
+              <div class="font-1">Deliver to:</div>
+              <div style="height: 10px;"></div>
+              <div style="justify-content: flex-start;" class="container-box">
+                <input (keyup)="pinCodeValue = $event.target.value" placeholder="Enter Pincode"
+                  class="font-2 pincode-field" type="text" maxlength="6">
+                <div style="width: 5px;"></div>
+                <div (click)="pinCodeCheckButtonClick()" class="font-2 pin-code-check-button">Check</div>
+              </div>
+              <div *ngIf="pinCodeCheckClicked && validPinCode" style="font-size: 13.5px;width: 180px;"
+                class="font-1 pin-code-time">Delivery available by
+                {{estimatedDeliveryDate | date : 'EEEE, MMMM d'}}</div>
+              <div *ngIf="pinCodeCheckClicked && !validPinCode" style="font-size: 13.5px;width: 180px;"
+                class="font-1 pin-code-time">Pin code is not valid</div>
+            </div>
+            <div style="height: 7px;"></div>
+
+          </div>
+          <div style="height: 10px;"></div>
+          <div *ngIf="productDetails?.isClassificationAvailable">
+            <div class="font-2">{{productDetails?.classificationName}} Available:</div>
+            <div style="justify-content: flex-start;" class="container-box">
+              <div [ngClass]="{'size-item-checked': chosenSizeIndex === i}" (click)="chooseSize(i)"
+                *ngFor="let eachItem of productDetails?.classificationTypes;let i = index" class="size-item">
+                {{eachItem}}</div>
+              <!-- <div style="font-size: 13px;text-decoration: underline;cursor: pointer;" class="font-3">Size Chart</div> Commented out as not in scope -->
+            </div>
+          </div>
+          <div>
+            <div style="height:20px;"></div>
+            <div class="font-2" style="display: flex;">
+              <button *ngIf="!productInCart" (click)="addToCart();" class="cart-button">Add To Cart</button>
+              <button *ngIf="productInCart" (click)="addToCart();" class="cart-button"><span
+                  style="margin-right: 5px;">&#10004;</span>Go To Cart</button>
+              <button (click)="buyNow();" class="buy-now-button cart-button">Buy Now</button>
+            </div>
+          </div>
+          <div style="height: 30px;"></div>
+          <div class="product-details-boundary font-1">
+            <div (click)="clickProductSpecification();" [ngClass]="{'product-desc-tab-item-selected': specAboutFlag}"
+              class="font-2 product-desc-tab-item">Product Specification</div>
+            <div (click)="clickProductAbout();" [ngClass]="{'product-desc-tab-item-selected': !specAboutFlag}"
+              class="font-2 product-desc-tab-item">About Product</div>
+          </div>
+          <div style="height:20px"></div>
+          <div class="product-details-section">
+            <div *ngIf="!specAboutFlag" class="font-0 description-container">
+              {{productDetails?.aboutProduct}}
+            </div>
+            <div *ngIf="specAboutFlag" class="specification-box">
+              <div *ngFor="let eachSpec of productDetails?.productSpecificationList"
+                class="single-spec-container container-box">
+                <div class="spec-name font-0">{{eachSpec.specName}}</div>
+                <div class="font-1">{{eachSpec.specValue}}</div>
+              </div>
+            </div>
+          </div>
+          <div style="height:20px"></div>
+          <div style="border-bottom: 1px solid grey;width:100%"></div>
+          <div style="height:400px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pin-mob-product-details">
+    <div style="position: relative;" class="mob-main-image">
+      <owl-carousel-o [options]="mobMainImageCarouselConfig">
+        <ng-container *ngFor="let item of productDetails?.productImageList">
+          <ng-template carouselSlide>
+            <div class="container-box" style="width: 100%;height:490px;">
+              <img src="{{item}}" alt="">
+            </div>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+      <div (click)="clickWishlistButton();" class="mob-product-details-wishlist-button">
+        <img *ngIf="!productInWishList" src="/assets/wishlist-sign.svg" alt="Add to wishlist">
+        <img *ngIf="productInWishList" src="/assets/wishlist-added.svg" alt="Remove from wishlist">
+      </div>
+    </div>
+    <div style="height:45px;"></div>
+    <div class="mob-product-details">
+      <div style="font-size: 15px;" class="font-2">
+        {{productDetails?.mainName}}
+      </div>
+      <div style="font-size: 15px;" class="font-1">
+        {{productDetails?.oneLineDescription}}
+      </div>
+      <div style="height:5px"></div>
+      <div style="justify-content: flex-start;" class="container-box">
+        <div style="text-decoration: line-through;">&#8377;{{productDetails?.grossPrice}}</div>
+        <div style="width: 8px;"></div>
+        <div class="font-3 discount-box">{{productDetails?.discount}}% off</div>
+      </div>
+      <div style="height:5px;"></div>
+      <div style="justify-content: flex-start;" class="container-box">
+        <div style="font-size: 20px;" class="font-3">&#8377;{{productDetails?.actualPrice}}</div>
+        <div style="width: 8px"></div>
+        <div>+ Free Delivery</div>
+      </div>
+      <div style="margin-left: 30px;">
+        <ul class="font-1 product-bullets">
+          <li *ngFor="let each of productDetails?.shortOneLinePoints">{{each}}</li>
+        </ul>
+      </div>
+      <div style="height: 15px;"></div>
+      <div *ngIf="productDetails?.isClassificationAvailable">
+        <div>{{productDetails?.classificationName}} Available :</div>
+        <div style="justify-content: flex-start;" class="container-box">
+          <div [ngClass]="{'size-item-checked': chosenSizeIndex === i}" (click)="chooseSize(i)"
+            *ngFor="let each of productDetails?.classificationTypes; let i = index;" class="size-item">{{each}}</div>
+          <!-- <div style="font-size: 13px;text-decoration:underline;margin-left: 5px;" class="font-3">Size Chart</div> Commented out as out of scope -->
+        </div>
+      </div>
+      <div style="height: 15px;"></div>
+      <div class="font-1">Available from <span class="font-2 pointer underLineText">Amit Shopping Center</span></div>
+      <div style="height: 5px"></div>
+      <div class="mob-zip-code">
+        <div>Deliver to:</div>
+        <div style="height:8px;"></div>
+        <div style="justify-content: flex-start" class="container-box">
+          <input (keyup)="pinCodeValue = $event.target.value" class="font-2 pincode-field" type="text"
+            placeholder="Enter Pincode" maxlength="6">
+          <div style="width:5px;"></div>
+          <div (click)="pinCodeCheckButtonClick()" class="font-2 pin-code-check-button">Check</div>
+        </div>
+        <div style="height:5px;"></div>
+        <div *ngIf="pinCodeCheckClicked && validPinCode" style="font-size: 13.5px;" class="font-1 pin-code-time">
+          Delivery available by {{estimatedDeliveryDate | date : 'EEEE, MMMM d'}}</div>
+        <div *ngIf="pinCodeCheckClicked && !validPinCode" style="font-size: 13.5px;width: 180px;"
+          class="font-1 pin-code-time">Pin code is not valid</div>
+      </div>
+      <div style="height:15px;"></div>
+      <div class="container-box">
+        <button *ngIf="!productInCart" (click)="addToCart();" class="mob-cart-button">Add To Cart</button>
+        <button *ngIf="productInCart" (click)="addToCart();" class="mob-cart-button"><span
+            style="margin-right: 5px;">&#10004;</span>Go To Cart</button>
+        <button (click)="buyNow();" class="mob-cart-button">Buy Now</button>
+      </div>
+      <div style="height:15px;"></div>
+      <div class="mob-product-details-boundary font-1">
+        <div (click)="clickProductSpecification();" [ngClass]="{'product-desc-tab-item-selected': specAboutFlag}"
+          class="font-2 mob-product-desc-tab-item">Product Specification</div>
+        <div (click)="clickProductAbout();" [ngClass]="{'product-desc-tab-item-selected': !specAboutFlag}"
+          class="font-2 mob-product-desc-tab-item">About Product</div>
+      </div>
+      <div style="height:10px;"></div>
+      <div *ngIf="!specAboutFlag" class="mob-description-container font-1">
+        {{productDetails?.aboutProduct}}
+      </div>
+      <div *ngIf="specAboutFlag" class="mob-specification-box">
+        <div *ngFor="let eachSpec of productDetails?.productSpecificationList"
+          class="mob-single-spec-container container-box">
+          <div class="mob-spec-name font-0">{{eachSpec.specName}}</div>
+          <div class="font-1">{{eachSpec.specValue}}</div>
+        </div>
+      </div>
+      <div style="height:10px;"></div>
+      <div style="width:100%;border-bottom:1px solid grey;"></div>
+    </div>
+    <div style="height:300px;"></div>
+  </div>
+</ng-container>

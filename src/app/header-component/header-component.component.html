@@ -1,0 +1,38 @@
+<div class="pin-heading">
+    <div class="main-heading">
+        <div class="container-box" style="height: auto;width: 7%; min-width: 80px; max-width: 100px;">
+            <a [routerLink]="['/home']">
+                <img src="../../assets/new-choice.svg" alt="brand-logo">
+            </a>
+        </div>
+        <div class="container-box">
+            <div *ngIf="profileObject" style="margin-top: 2px; margin-right: 7px;">Hi, {{profileObject.name.split(' ')[0]}}</div>
+            <div>
+                <a *ngIf="!profile" class="header-button" [routerLink]="['/login']">
+                    <button class="clean-button">Login</button>
+                </a>
+                <a *ngIf="profile" class="header-button" [routerLink]="['/dashboard']">
+                    <button class="clean-button">My Dashboard</button>
+                </a>
+                <a class="header-button" [routerLink]="['/blog']">
+                    <button class="clean-button">Blog</button>
+                </a>
+                <button *ngIf="profile" (click)="logoutSession()" class="header-button clean-button">Logout</button>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-heading">
+        <div style="width: 5%;"></div>
+        <div (click)="openSideBar();" class="hamburger-button">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div style="width: 3%;"></div>
+        <a [routerLink]="['/home']">
+            <div style="width: 70px;">
+                <img src="../../assets/new-choice.svg" alt="company logo">
+            </div>
+        </a>
+    </div>
+</div>

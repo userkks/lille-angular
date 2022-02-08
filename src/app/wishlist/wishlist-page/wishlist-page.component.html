@@ -1,0 +1,41 @@
+<app-page-loading *ngIf="!wishListLoaded"></app-page-loading>
+<div *ngIf="wishListLoaded">
+    <div style="height: 30px;"></div>
+    <div *ngIf="!emptyWishList" style="width:80%;margin: 0% auto;">
+        <div style="font-size: 18px;" class="font-2">My Wishlist</div>
+        <div style="height: 10px;"></div>
+        <div style="border-bottom: 1px solid lightgray;"></div>
+        <div style="height:40px;"></div>
+        <div class="wishlist-container" style="display: flex; flex-wrap: wrap;">
+            <div *ngFor="let item of productDetailsList" class="wishlist-item">
+                <a routerLink="/product/{{item.productUrlTitle}}/{{item._id}}">
+                    <div style="height:210px" class="container-box">
+                        <img src="{{item.productImageList[0]}}" alt="product image">
+                    </div>
+                    <div style="height: 10px;"></div>
+                    <div style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;" class="font-0">
+                        {{item.oneLineDescription}}</div>
+                    <div style="display: flex;">
+                        <div style="font-size: 16px;" class="font-3">&#8377;{{item.grossPrice}}</div>
+                        <div style="width: 10px;"></div>
+                        <div style="text-decoration: line-through;" class="font-1">&#8377;{{item.actualPrice}}</div>
+                        <div style="width: 10px;"></div>
+                        <div class="discount-box font-3">{{item.discount}}% off</div>
+                    </div>
+                    <div style="height:5px;"></div>
+                    <div class="font-1">{{item.uniqueSingleSpec.specName}}: {{item.uniqueSingleSpec.specValue}}</div>
+                </a>
+                <div style="height: 15px;"></div>
+                <div style="justify-content: space-around;" class="container-box">
+                    <a routerLink="/product/{{item.productUrlTitle}}/{{item._id}}">
+                        <button style="color: blue;font-size: 16px;" class="font-2">Buy Now</button>
+                    </a>
+                    <button (click)="deleteFromWishList(item._id);" style="color: blue;font-size: 16px;" class="font-2">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="emptyWishList" style="width: 100%; display: flex;justify-content: center;">
+        <div style="margin-top: 60px;">Empty Here !! Add product to Your Wishlist</div>
+    </div>
+</div>

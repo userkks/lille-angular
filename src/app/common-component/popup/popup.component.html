@@ -1,0 +1,22 @@
+<div *ngIf="popupConfiguration?.open" class="container-box popup-background">
+    <div class="popup-box">
+        <div *ngIf="popupConfiguration?.closeButton" class="full-width align-right">
+            <button (click)="closePopup()" style="font-size: 25px;">
+                &#10006;
+            </button>
+        </div>
+        <div style="min-height: 190px" class="container-box full-width">
+            <app-popup-username *ngIf="popupConfiguration?.type === 'userName'"></app-popup-username>
+            <div *ngIf="popupConfiguration?.type === 'confirmation'">
+                <div style="text-align: center;">
+                    <h5>{{popupConfiguration?.confirmationMessage}}</h5>
+                </div>
+                <div style="height: 25px;"></div>
+                <div class="container-box full-width">
+                    <button (click)="confirmPopup()" class="transparent-button success-button">Confirm</button>
+                    <button (click)="closePopup()" class="transparent-button delete-button">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

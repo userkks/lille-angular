@@ -1,0 +1,13 @@
+<owl-carousel-o [options]="owlConfiguration">
+    <ng-container *ngFor="let item of itemList; let i = index">
+        <ng-template carouselSlide>
+            <div style=" width: 100%; border: 1px solid lightgray;display: flex;justify-content: center;">
+                <div style="height: 300px">
+                    <div style="height: 150px; width:100px;" class="container-box">
+                        <img src="/assets/large-1.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </ng-container>
+</owl-carousel-o>

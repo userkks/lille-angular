@@ -1,0 +1,16 @@
+<div>
+    <h5>Select your parent path name: </h5>
+    <div style="height: 5px;"></div>
+    <div><input [(ngModel)]="userNameFieldValue" (keyup)="userNameValidation($event)" placeholder="Select your root path" class="input-field full-width" type="text"></div>
+    <div style="font-size: 15px" class="align-center">
+        <div *ngIf="!userNameValidationError && userNameFieldValue" class="align-center">
+            <div>All of your api path will look like this -</div>
+            <i>http://localhost:4200/lil/{{userNameFieldValue}}/...</i>
+        </div>
+        <div class="error-message" *ngIf="userNameValidationError">{{userNameValidationError}}</div>
+    </div>
+    <div style="height: 5px;"></div>
+    <div class="align-center">
+        <button (click)="saveUserName()" class="transparent-button">Submit</button>
+    </div>
+</div>

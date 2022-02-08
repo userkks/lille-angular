@@ -1,0 +1,14 @@
+<div style="height: 20px;"></div>
+<div class="full-width container-box">
+    <div style="max-width: 720px; margin: 20px;">
+        <h2>{{blogPostDetails?.header}}</h2>
+        <div style="height: 5px"></div>
+        <ng-container *ngFor="let item of blogPostDetails?.content">
+            <p *ngIf="item.paragraph" [innerHtml]="item.paragraph"></p>
+            <div *ngIf="item.image" class="container-box blog-image-container">
+                <img src="../../../assets/illust 2.png" alt="">
+                <div style="font-weight: 300; font-style: italic;">{{item.image.description}}</div>
+            </div>
+        </ng-container>
+    </div>
+</div>

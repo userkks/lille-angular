@@ -1,0 +1,74 @@
+<div style="height: 40px;"></div>
+<div class="container-box full-width">
+    <div class="api-list-container">
+        <div class="align-corner">
+            <h3>All API Endpoints</h3>
+            <div class="vertical-center">
+                <button style="border-radius: 5px;" (click)="goToDataTable()" class="cart-button button-small">Create Data Table</button>
+                <button style="border-radius: 5px;" (click)="topCreateNewButtonClick()" class="cart-button button-small">Create New API</button>
+            </div>
+        </div>
+        <div class="gap"></div>
+        <div class="full-width api-list">
+            <div *ngFor="let item of apiList" class="api-item align-corner">
+                <a class="link monospace api-list-link" href="{{item.url}}" target="_blank" rel="noopener noreferrer">
+                    {{item.url}}
+                </a>
+                <div>{{item.type}}</div>
+                <div>Hit Count: {{item.hitCount}}</div>
+                <div class="container-box">
+                    <button (click)="editApi(item)" class="transparent-button button-small">Edit</button>
+                    <button (click)="deleteApi(item)"
+                        class="transparent-button button-small delete-button">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height: 40px;"></div>
+<div class="container-box">
+    <button id="createOrEditButton" [class]="apiFormState === 'edit' ? 'yellow-button' : ''" (click)="saveApiData()"
+        style="display: flex;" class="transparent-button vertical-center">
+        <span>{{apiFormState === 'create' ? 'Create' : 'Edit'}} API</span>
+        <div class="image-container" style="height: 17px; margin-left: 5px;">
+            <img [class]="{displayNone: savingData}" src="../../../assets/play-button.svg" alt="">
+            <img [class]="{displayNone: !savingData}" src="../../../assets/loading-buffering.gif" alt="">
+        </div>
+    </button>
+</div>
+<div style="height: 5px;"></div>
+<div *ngIf="messageContent"
+    [style]="{color: messageContent.status === 'success' ? 'green' : 'red', fontWeight: '600', textAlign: 'center'}"
+    class="container-box">
+    {{messageContent.message || ""}}</div>
+<div style="height: 40px;"></div>
+<div class="container-box full-width">
+    <div id="formApplicationId" class="container-box flex-wrap"
+        style="width: 60%; height: max-content; background-color: #ddf3e0;border-radius: 5px; min-width: min-content; padding-top: 20px;">
+        <div style="width: 45%; min-width: 320px; margin: 0px 20px 20px;">
+            <input [disabled]="apiFormState === 'edit'" [class]="{'error-input-field': apiPathValidationError}"
+                (focus)="apiPathValidationError = ''" (blur)="apiPathValidation($event)" [(ngModel)]="apiPath"
+                type="text" class="input-field full-width" placeholder="Choose API path">
+            <div class="error-message">{{(apiPath.length && apiPathValidationError) ? apiPathValidationError : ""}}
+            </div>
+            <div *ngIf="!apiPathValidationError && apiPath" style="font-size: 14px;">Preview: <i>
+                    {{env.uiUrl}}/{{env.userApiRoot}}/{{env.profile.userName}}/{{apiPath}}</i></div>
+            <div style="height: 20px;"></div>
+            <textarea [class]="{'error-input-field': jsonFieldValidationError}" (focus)="jsonFieldValidationError = ''"
+                (blur)="jsonFieldValidation($event)" [(ngModel)]="jsonField" class="input-field full-width"
+                style="height: 400px;" placeholder="Enter JSON data"></textarea>
+            <div class="error-message">{{(jsonField.length && jsonFieldValidationError) ? jsonFieldValidationError :
+                ""}}</div>
+        </div>
+        <div id="readOnlyField" style="width: 45%; min-width: 320px; margin: 0px 20px 20px 20px;">
+            <div [class]="{'input-field': true, 'full-width': true, 'background-grey': !responseApiPath, 'home-readonly-panel': true}"
+                style="min-height: 39px;">
+                <a class="link" [href]="responseApiPath || '#'" target="_blank">{{responseApiPath || ""}}</a>
+            </div>
+            <div style="height: 20px;"></div>
+            <div [class]="{'input-field': true, 'full-width': true, 'background-grey': !responseApiPath, 'home-readonly-panel': true}"
+                style="height: 400px;">{{responseApiObject ? (responseApiObject | json) : ""}}
+            </div>
+        </div>
+    </div>
+</div>

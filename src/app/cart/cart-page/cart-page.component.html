@@ -1,0 +1,104 @@
+<app-page-loading *ngIf="!cartItemLoaded"></app-page-loading>
+<div *ngIf="cartItemLoaded" class="pin-cart-page">
+  <div style="height:30px;"></div>
+  <div class="cart-item-heading font-3">My Cart Items</div>
+  <div *ngIf="emptyCart" style="width: 100%;display: flex;justify-content: center;">
+    <div style="margin-top: 60px;">Empty here !! Continue Shopping ..</div>
+  </div>
+  <ng-container *ngIf="!emptyCart">
+    <div class="mob-checkout-section">
+      <div>
+        <div style="font-size: 16px;" class="font-3"><span class="font-1">Amount: </span>
+          &#8377;{{totalActualCartPrice}}</div>
+      </div>
+      <div>
+        <button (click)="cartCheckout();" class="mob-cart-checkout-button font-2">
+          <div class="container-box">
+            <div style="width:25px;">
+              <img src="/assets/shopping-cart-white-shape.svg" alt="cart logo">
+            </div>
+            <div style="width:5px"></div>
+            <div>Check Out</div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div style="height: 20px;"></div>
+    <div style="display: flex;justify-content: center;width: 100%;">
+      <div class="cart-item-wrapper">
+        <div *ngFor="let item of productDetailsList;" class="card-product-item">
+          <div style="height: 150px;display:flex;">
+            <div style="width:3%;"></div>
+            <a routerLink="/product/{{item.productUrlTitle}}/{{item._id}}"
+              style="height: inherit;width: 22%;min-width: 120px;" class="container-box">
+              <img src="{{item.productImageList[0]}}" alt="">
+            </a>
+            <div style="width:10px;"></div>
+            <div style="min-width:200px;width:37%;display: flex;flex-direction:column;justify-content: space-between;">
+              <div>
+                <div style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;" class="font-2">
+                  {{item.mainName}}</div>
+                <div style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;" class="font-0">
+                  {{item.oneLineDescription}}</div>
+                <div style="height:5px;"></div>
+                <div style="display: flex;">
+                  <div style="text-decoration: line-through;">&#8377;{{item.grossPrice}}</div>
+                  <div style="width: 10px;"></div>
+                  <div class="font-3 discount-box">{{item.discount}}% off</div>
+                </div>
+                <div style="font-size: 18px;" class="font-3">&#8377;{{item.actualPrice}}</div>
+                <!-- <div style="height: 10px;"></div> -->
+                <div *ngIf="item.selectedSize" class="font-0">{{item.classificationName}}: {{item.selectedSize}}</div>
+              </div>
+              <div style="display: flex;margin-bottom: 10px;">
+                <button (click)="moveToWishList(item._id);" class="cart-action-button font-2">MOVE TO WISHLIST</button>
+                <div style="width: 15px;"></div>
+                <button (click)="deleteFromCart(item._id);" class="cart-action-button font-2">DELETE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="width: 3%;"></div>
+      <div class="cart-billing-area">
+        <div style="font-size: 18px;" class="font-2">Billing Details</div>
+        <div style="height:5px;"></div>
+        <div style="padding: 0px 3%">
+          <div class="cart-billing-row">
+            <div>Items</div>
+            <div>{{productDetailsList.length}} Items</div>
+          </div>
+          <div class="cart-billing-row">
+            <div>Total Price</div>
+            <div>&#8377;{{totalGrossCartPrice}}</div>
+          </div>
+          <div class="cart-billing-row">
+            <div>Discount</div>
+            <div>- &#8377;{{totalDiscountCartPrice}}</div>
+          </div>
+          <div class="cart-billing-row">
+            <div>Delivery Charges</div>
+            <div>&#8377;0</div>
+          </div>
+          <div style="height: 10px;"></div>
+          <div class="cart-billing-row">
+            <div style="font-size: 16px;" class="font-2">Amount Payable</div>
+            <div style="font-size: 16px;font-weight: bold;" class="font-3">&#8377;{{totalActualCartPrice}}</div>
+          </div>
+        </div>
+        <div style="height:10px;"></div>
+        <div style="justify-content: flex-end;" class="container-box">
+          <button (click)="cartCheckout();" class="cart-checkout-button font-2">
+            <div class="container-box">
+              <div style="width:30px;">
+                <img src="/assets/shopping-cart-white-shape.svg" alt="cart logo">
+              </div>
+              <div style="width:5px"></div>
+              <div>Check Out</div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

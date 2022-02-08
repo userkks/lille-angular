@@ -1,0 +1,102 @@
+<div style="width: 100%;margin-top: 30px;" class="container-box save-product">
+    <form [formGroup]="saveProductForm" (ngSubmit)="saveProductSubmit()" style="width: 85%;">
+        <div class="same-line">
+            <input formControlName="productName" [ngClass]="{'error-input-field': inputErrorCheck('productName')}"
+                class="custom-input-field order-form-input-field" style="width: 30%" type="text"
+                placeholder="Product Name max 2 words">
+            <div style="width: 30px;"></div>
+            <input formControlName="oneLineDescription"
+                [ngClass]="{'error-input-field': inputErrorCheck('oneLineDescription')}"
+                class="custom-input-field order-form-input-field" style="width: 40%;" type="text"
+                placeholder="One line description">
+        </div>
+        <div class="same-line">
+            <input formControlName="grossPrice" [ngClass]="{'error-input-field': inputErrorCheck('grossPrice')}"
+                class="custom-input-field order-form-input-field" style="width: 20%;" type="number"
+                placeholder="Gross Price">
+            <div style="width: 10px;"></div>
+            <input formControlName="discount" [ngClass]="{'error-input-field': inputErrorCheck('discount')}"
+                class="custom-input-field order-form-input-field" style="width: 20%;" type="number"
+                placeholder="Discount">
+            <div style="width: 10px;"></div>
+            <input formControlName="actualPrice" [ngClass]="{'error-input-field': inputErrorCheck('actualPrice')}"
+                class="custom-input-field order-form-input-field" style="width: 20%;" type="number"
+                placeholder="Actual Price">
+        </div>
+        <div class="same-line" style="width: 100%;">
+            <textarea formControlName="shortPoints" (keyup)="shortPointsFieldChange($event)"
+                [ngClass]="{'error-input-field': inputErrorCheck('shortPoints')}" class="order-form-input-field"
+                style="width: 45%" rows="5" placeholder="Short points for product. Pipe separate each point"></textarea>
+            <div style="width: 10px;"></div>
+            <div class="save-input-suggestion-container">
+                <div *ngFor="let eachPoint of shortPointList" class="save-input-suggestion">{{eachPoint}}</div>
+            </div>
+        </div>
+        <div style="height: 10px;"></div>
+        <div class="same-line">
+            <input formControlName="uniqueSpecification"
+                [ngClass]="{'error-input-field': inputErrorCheck('uniqueSpecification')}"
+                class="custom-input-field order-form-input-field" style="width: 30%;" type="text"
+                placeholder="Unique single Specification. {'key': 'value'}">
+            <div style="width: 10px;"></div>
+            <input formControlName="sizeRelatedProperty"
+                [ngClass]="{'error-input-field': inputErrorCheck('sizeRelatedProperty')}"
+                class="custom-input-field order-form-input-field" style="width: 30%;" type="text"
+                placeholder="Sizes or any other related property name">
+            <div style="width: 10px;"></div>
+            <input formControlName="propertyClassification"
+                [ngClass]="{'error-input-field': inputErrorCheck('propertyClassification')}"
+                class="custom-input-field order-form-input-field" style="width: 30%;" type="text"
+                placeholder="Pipe seperated property classifications">
+        </div>
+        <div class="same-line">
+            <textarea formControlName="productSpecification" (keyup)="specificationListBoxChange($event)"
+                [ngClass]="{'error-input-field': inputErrorCheck('productSpecification')}"
+                class="order-form-input-field" style="width: 45%" rows="5"
+                placeholder="Product specification key value pair, insert in json format"></textarea>
+            <div style="width: 10px;"></div>
+            <div class="save-input-suggestion-container">
+                <div *ngFor="let eachSpec of specificationListToShow" class="save-input-suggestion">{{eachSpec.key}}
+                    &#8594; {{eachSpec.value}}</div>
+            </div>
+        </div>
+        <div style="height: 10px;"></div>
+        <div class="same-line">
+            <input formControlName="productImageLink"
+                [ngClass]="{'error-input-field': inputErrorCheck('productImageLink')}"
+                class="custom-input-field order-form-input-field" style="width: 80%;" type="text"
+                placeholder="Pipe seperated product image links">
+        </div>
+        <div class="same-line">
+            <textarea formControlName="aboutProductDescription"
+                [ngClass]="{'error-input-field': inputErrorCheck('aboutProductDescription')}"
+                class="order-form-input-field" style="width: 45%" rows="5"
+                placeholder="About product, small paragraph"></textarea>
+            <div style="width: 20px;"></div>
+            <input formControlName="productTitleInUrl"
+                [ngClass]="{'error-input-field': inputErrorCheck('productTitleInUrl')}"
+                class="custom-input-field order-form-input-field" style="width: 30%;" type="text"
+                placeholder="Product title in url">
+            <div style="width: 20px;"></div>
+            <button [disabled]="saveProductForm.invalid" type="submit" class="cart-checkout-button font-2">Save
+                Product</button>
+        </div>
+        <div style="height: 10px;"></div>
+        <!-- <div class="same-line">
+            <textarea (keyup)="keywordFieldChange($event.target.value)" formControlName="productKeyword" (keyup)="specificationListBoxChange($event)"
+                [ngClass]="{'error-input-field': inputErrorCheck('productKeyword')}"
+                class="order-form-input-field" style="width: 45%" rows="5"
+                placeholder="Product specification key value pair, insert in json format"></textarea>
+            <div style="width: 10px;"></div>
+            <div class="save-input-suggestion-container">
+                <div *ngFor="let keyword of keywordListToShow" class="save-input-suggestion">{{keyword}}</div>
+            </div>
+        </div>
+        <div class="same-line">
+            <div>Suggestions: </div>
+            <div style="width: 10px;"></div>
+            <div (click)="clickOnSuggestion();" style="padding: 3px 5px;border: 1px solid;border-radius: 50px;width: max-content; cursor: pointer;">{{keywordSuggestion}}</div>
+        </div>
+        <div style="height: 100px;"></div> -->
+    </form>
+</div>
