@@ -196,10 +196,14 @@
   flex-direction: column;
 }
 
-.api-list-container {
+.default-width {
   min-width: 320px;
 }
 
 .api-list-link { 
   width: auto;
+}
+
+.data-table-form-container {
+  width: 330px;
 }

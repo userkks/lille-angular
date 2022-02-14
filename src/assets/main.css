@@ -55,6 +55,11 @@ textarea:focus {
   outline: none;
 }
 
+label {
+  margin: 0px 5px;
+  font-weight: 600;
+}
+
 input[type="checkbox"] {
   width: 18px;
   height: 18px;
@@ -87,6 +92,10 @@ button {
 
 i {
   word-break: break-all;
+}
+
+.form-field {
+  margin: 8px 0px;
 }
 
 .clean-button {
@@ -437,6 +446,10 @@ body {
   font-size: 18px;
 }
 
+.medium-input {
+  padding: 4px 8px;
+}
+
 .background-grey {
   background-color: #eceff1;
 }
@@ -539,7 +552,7 @@ body {
 }
 
 .success-button:hover {
-  background-color: #72E980;
+  background-color: #72e980;
 }
 
 .size-item {
@@ -1181,7 +1194,7 @@ app-popup-username {
   }
 }
 
-.api-list-container {
+.default-width {
   min-width: 720px;
   width: 60%;
 }
@@ -1231,4 +1244,32 @@ app-popup-username {
   top: 70px;
   right: 0px;
   width: max-content;
+}
+
+.create-data-table-button {
+  border-radius: 5px;
+  border: 1px dashed #0044ff;
+  padding: 8px 10px;
+  border-style: dashed;
+  width: fit-content;
+  color: #0044ff;
+  cursor: pointer;
+}
+
+.column-form {
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  padding: 10px;
+  width: 300px;
+  margin: 5px;
+}
+
+.column-form-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.data-table-form-container {
+  max-height: none;
+  padding: 10px;
 }
