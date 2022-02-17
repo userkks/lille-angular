@@ -96,6 +96,9 @@ i {
 
 .form-field {
   margin: 8px 0px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .clean-button {
@@ -107,6 +110,10 @@ i {
 
 .gap {
   height: 15px;
+}
+
+.small-gap {
+  height: 1px;
 }
 
 .clean-button:hover {
@@ -678,19 +685,20 @@ owl-carousel-o {
 /* ----------------------- ng-select styling ---------------------------- */
 
 .ng-select .ng-select-container {
-  border: 1px solid lightslategray;
-  border-radius: 5px;
-}
-
-.ng-dropdown-panel {
-  width: fit-content;
+  border: 1px solid lightslategray !important;
+  border-radius: 5px !important;
+  width: 228px !important;
 }
 
 .error-ng-select .ng-select-container {
-  border: 1px solid red;
+  border: 1px solid red !important;
 }
 
 /* ----------------------- end of ng-select styling ---------------------- */
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
 
 .product-pic-item {
   height: 70px;
@@ -961,6 +969,7 @@ owl-carousel-o {
 .error-message {
   color: red;
   font-size: 14px;
+  height: 0px;
 }
 
 .hide-element {

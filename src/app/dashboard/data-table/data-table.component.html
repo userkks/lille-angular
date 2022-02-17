@@ -5,17 +5,10 @@
             <h3>All Data Tables</h3>
         </div>
         <div class="gap"></div>
-        <button class="create-data-table-button">
+        <button *ngIf="componentState === 'showTable'" (click)="createDataTable()" class="create-data-table-button">
             <b>&#43;</b> Create Data Table
-        </button>
-        <button style="display: flex;" class="transparent-button vertical-center">
-            <span>Create API</span>
-            <div class="image-container" style="height: 17px; margin-left: 5px;">
-                <img src="../../../assets/play-button.svg" alt="">
-                <img src="../../../assets/loading-buffering.gif" alt="">
-            </div>
         </button>
     </div>
     <div class="gap"></div>
-    <app-table-creation-form></app-table-creation-form>
+    <app-table-creation-form *ngIf="componentState === 'createTable'" class="default-width"></app-table-creation-form>
 </div>

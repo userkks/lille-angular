@@ -11,4 +11,10 @@ export class DataTableComponent {
   constructor(private fb: FormBuilder) {
   }
 
+  componentState = 'showTable';       // values could be 'createTable' or 'showTable'
+
+  createDataTable() {
+    this.componentState = 'createTable';
+  }
+
 }

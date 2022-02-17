@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTableComponent } from './data-table/data-table.component';
 import { TableCreationFormComponent } from './table-creation-form/table-creation-form.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { TableCreationFormComponent } from './table-creation-form/table-creation
     CommonModule,
     DashboardRoutingModule,
     FormsModule,
+    NgSelectModule,
     ReactiveFormsModule
   ]
 })

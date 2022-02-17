@@ -197,13 +197,9 @@
 }
 
 .default-width {
-  min-width: 320px;
+  min-width: 330px;
 }
 
 .api-list-link { 
   width: auto;
-}
-
-.data-table-form-container {
-  width: 330px;
 }
