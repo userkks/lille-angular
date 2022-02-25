@@ -266,6 +266,11 @@ body {
   color: #484848;
 }
 
+.font-4 {
+  font-weight: 600;
+  font-size: 16px;
+}
+
 .three-dot-line {
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1290,4 +1295,29 @@ app-popup-username {
 .data-table-form-container {
   max-height: none;
   padding: 10px;
+}
+
+.table-list-container {
+  border: 1px solid #c8c8c8;
+  box-sizing: border-box;
+  padding: 10px 5px;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.table-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  padding: 10px;
+  border: 2px solid #c8c8c8;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 5px 10px;
+}
+
+.table-item:hover {
+  border: 2px solid #7e7e7e
 }

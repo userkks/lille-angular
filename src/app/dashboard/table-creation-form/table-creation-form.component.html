@@ -1,84 +1,106 @@
-<div>
-    <button (click)="createTable()" style="display: flex;" class="transparent-button vertical-center">
-        <span>Create Table</span>
-        <div class="image-container" style="height: 17px; margin-left: 5px;">
-            <img *ngIf="!dataSaving" src="../../../assets/play-button.svg" alt="">
-            <img *ngIf="dataSaving" src="../../../assets/loading-buffering.gif" alt="">
+<div class="align-center">
+    <div style="height: 40px;"></div>
+    <div class="default-width">
+        <div>
+            <h3>Create New Table</h3>
         </div>
-    </button>
-    <div class="gap"></div>
-    <form [formGroup]="tableCreationForm" class="api-list data-table-form-container">
-        <div class="form-field">
-            <label>Give your table a name: </label>
-            <div>
-                <input [ngClass]="{'error-input-field': showErrorMessage('tableName')}" formControlName="tableName" class="input-field medium-input" placeholder="Table Name"
-                    type="text">
-                <div *ngIf="showErrorMessage('tableName')" class="error-message">
-                    **Table Name is Required
-                </div>
-            </div>
-        </div>
-        <div class="small-gap"></div>
-        <div class="form-field">
-            <label>API key to access table: </label>
-            <div>
-                <input [ngClass]="{'error-input-field': showErrorMessage('apiKey')}" formControlName="apiKey" class="input-field medium-input" placeholder="API Key" type="text">
-                <div *ngIf="showErrorMessage('apiKey')" class="error-message">
-                    **API key is Required
-                </div>
-                <div class="error-message" *ngIf="tableCreationForm.get('apiKey').touched && tableCreationForm.get('apiKey').errors">{{tableCreationForm.get('apiKey').errors.errorMessage}}</div>
-            </div>
-        </div>
-        <div class="small-gap"></div>
         <div class="gap"></div>
-        <button (click)="addColumn()" class="transparent-button button-small">+ Add Column</button>
+        <button (click)="createTable()" style="display: flex;" class="transparent-button vertical-center">
+            <span>Create Table</span>
+            <div class="image-container" style="height: 17px; margin-left: 5px;">
+                <img *ngIf="!dataSaving" src="../../../assets/play-button.svg" alt="">
+                <img *ngIf="dataSaving" src="../../../assets/loading-buffering.gif" alt="">
+            </div>
+        </button>
         <div class="gap"></div>
-        <div class="column-form-container">
-            <div *ngFor="let column of columnFormArray.controls; let i = index;" formArrayName="columnFormArray"
-                class="column-form">
-                <form [formGroupName]="i">
-                    <div class="form-field">
-                        <label>Column Name: </label>
-                        <div>
-                            <input [ngClass]="{'error-input-field': showColumnErrorMessage(i, 'columnName')}" formControlName="columnName" class="input-field medium-input"
-                                placeholder="Column Name" type="text">
-                            <div *ngIf="showColumnErrorMessage(i, 'columnName')" class="error-message">**Column Name is
-                                required</div>
-                        </div>
+        <form [formGroup]="tableCreationForm" class="api-list data-table-form-container">
+            <div class="form-field">
+                <label>Give your table a name: </label>
+                <div>
+                    <input [ngClass]="{'error-input-field': showErrorMessage('tableName')}" formControlName="tableName"
+                        class="input-field medium-input" placeholder="Table Name" type="text">
+                    <div *ngIf="showErrorMessage('tableName')" class="error-message">
+                        **Table Name is Required
                     </div>
-                    <div class="small-gap"></div>
-                    <div class="form-field">
-                        <label>Column key: </label>
-                        <div>
-                            <input [ngClass]="{'error-input-field': showColumnErrorMessage(i, 'columnKey') || showColumnApiErrorMessage(i)}" formControlName="columnKey" class="input-field medium-input"
-                                placeholder="Unique Column Key" type="text">
-                            <div *ngIf="showColumnErrorMessage(i, 'columnKey')" class="error-message">**Column key is
-                                required</div>
-                            <div *ngIf="showColumnApiErrorMessage(i)" class="error-message">{{showColumnApiErrorMessage(i)}}</div>
+                </div>
+            </div>
+            <div class="small-gap"></div>
+            <div class="form-field">
+                <label>API key to access table: </label>
+                <div>
+                    <input [ngClass]="{'error-input-field': showErrorMessage('apiKey')}" formControlName="apiKey"
+                        class="input-field medium-input" placeholder="API Key" type="text">
+                    <div *ngIf="showErrorMessage('apiKey')" class="error-message">
+                        **API key is Required
+                    </div>
+                    <div class="error-message"
+                        *ngIf="tableCreationForm.get('apiKey').touched && tableCreationForm.get('apiKey').errors">
+                        {{tableCreationForm.get('apiKey').errors.errorMessage}}</div>
+                </div>
+            </div>
+            <div class="small-gap"></div>
+            <div class="gap"></div>
+            <button (click)="addColumn()" class="transparent-button button-small">+ Add Column</button>
+            <div class="gap"></div>
+            <div class="column-form-container">
+                <div *ngFor="let column of columnFormArray.controls; let i = index;" formArrayName="columnFormArray"
+                    class="column-form">
+                    <form [formGroupName]="i">
+                        <div class="form-field">
+                            <label>Column Name: </label>
+                            <div>
+                                <input [ngClass]="{'error-input-field': showColumnErrorMessage(i, 'columnName')}"
+                                    formControlName="columnName" class="input-field medium-input"
+                                    placeholder="Column Name" type="text">
+                                <div *ngIf="showColumnErrorMessage(i, 'columnName')" class="error-message">**Column Name
+                                    is
+                                    required</div>
+                            </div>
                         </div>
+                        <div class="small-gap"></div>
+                        <div class="form-field">
+                            <label>Column key: </label>
+                            <div>
+                                <input
+                                    [ngClass]="{'error-input-field': showColumnErrorMessage(i, 'columnKey') || showColumnApiErrorMessage(i)}"
+                                    formControlName="columnKey" class="input-field medium-input"
+                                    placeholder="Unique Column Key" type="text">
+                                <div *ngIf="showColumnErrorMessage(i, 'columnKey')" class="error-message">**Column key
+                                    is
+                                    required</div>
+                                <div *ngIf="showColumnApiErrorMessage(i)" class="error-message">
+                                    {{showColumnApiErrorMessage(i)}}</div>
+                            </div>
 
-                    </div>
-                    <div class="small-gap"></div>
-                    <div style="flex-direction: column; align-items: flex-start;" class="form-field">
-                        <label>Type: </label>
-                        <ng-select [ngClass]="{'error-select-field': showColumnErrorMessage(i, 'columnType')}" formControlName="columnType" [searchable]="false" placeholder="Column Value Type" [clearable]="false" [items]="dataTypeList"></ng-select>
-                        <div *ngIf="showColumnErrorMessage(i, 'columnType')" class="error-message">**Column Type is
-                            required</div>
-                    </div>
-                    <div class="small-gap"></div>
-                    <div class="form-field">
-                        <label>Default Value: </label>
-                        <input [ngClass]="{'error-input-field': columnFormArray.controls[i].errors && columnFormArray.controls[i].controls.defaultValue.touched}" formControlName="defaultValue" class="input-field medium-input"
-                            placeholder="Default Value" type="text">
-                    <div *ngIf="columnFormArray.controls[i].errors && columnFormArray.controls[i].controls.defaultValue.touched" class="error-message">{{columnFormArray.controls[i].errors.errorMessage}}</div>
-                    </div>
-                    <div class="gap"></div>
-                    <div class="full-width container-box">
-                        <button (click)="deleteColumn(i)" class="transparent-button delete-button button-small">Delete
-                            Column</button>
-                    </div>
-                </form>
+                        </div>
+                        <div class="small-gap"></div>
+                        <div style="flex-direction: column; align-items: flex-start;" class="form-field">
+                            <label>Type: </label>
+                            <ng-select [ngClass]="{'error-select-field': showColumnErrorMessage(i, 'columnType')}"
+                                formControlName="columnType" [searchable]="false" placeholder="Column Value Type"
+                                [clearable]="false" [items]="dataTypeList"></ng-select>
+                            <div *ngIf="showColumnErrorMessage(i, 'columnType')" class="error-message">**Column Type is
+                                required</div>
+                        </div>
+                        <div class="small-gap"></div>
+                        <div class="form-field">
+                            <label>Default Value: </label>
+                            <input
+                                [ngClass]="{'error-input-field': columnFormArray.controls[i].errors && columnFormArray.controls[i].controls.defaultValue.touched}"
+                                formControlName="defaultValue" class="input-field medium-input"
+                                placeholder="Default Value" type="text">
+                            <div *ngIf="columnFormArray.controls[i].errors && columnFormArray.controls[i].controls.defaultValue.touched"
+                                class="error-message">{{columnFormArray.controls[i].errors.errorMessage}}</div>
+                        </div>
+                        <div class="gap"></div>
+                        <div class="full-width container-box">
+                            <button (click)="deleteColumn(i)"
+                                class="transparent-button delete-button button-small">Delete
+                                Column</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>

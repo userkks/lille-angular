@@ -5,10 +5,17 @@
             <h3>All Data Tables</h3>
         </div>
         <div class="gap"></div>
-        <button *ngIf="componentState === 'showTable'" (click)="createDataTable()" class="create-data-table-button">
+        <button (click)="createDataTable()" class="create-data-table-button">
             <b>&#43;</b> Create Data Table
         </button>
     </div>
     <div class="gap"></div>
-    <app-table-creation-form (backToTableView)="backFromTableCreation(message)" *ngIf="componentState === 'createTable'" class="default-width"></app-table-creation-form>
+    <div *ngIf="allTableList.length" class="default-width">
+        <div class="table-list-container">
+            <div *ngFor="let item of allTableList" class="table-item">
+                <div class="font-4">{{ item.tableName }}</div>
+                <div>( {{item.apiKey}} )</div>
+            </div>
+        </div>
+    </div>
 </div>

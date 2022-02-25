@@ -1,24 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { CommonService } from 'src/app/common/common.service';
+import { PopupService } from 'src/app/common/popup.service';
 
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css']
 })
-export class DataTableComponent {
+export class DataTableComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) {
+  constructor(private router: Router, private commonService: CommonService, private popupService: PopupService) {
   }
 
-  componentState = 'showTable';       // values could be 'createTable' or 'showTable'
+  subscription: Subscription = new Observable().subscribe();
+  allTableList = [];
+
+  ngOnInit(): void {
+    this.subscription.add(this.commonService.getAllTable().subscribe((res: any) => {
+      this.allTableList = res;
+    }, (error) => {
+      console.log(error);
+      this.popupService.openNotification({
+        type: 'error',
+        message: 'Some error occurred.'
+      });
+    }))
+  }
 
   createDataTable() {
-    this.componentState = 'createTable';
+    this.router.navigate(['dashboard', 'create-table']);
   }
 
   backFromTableCreation() {
-    this.componentState = 'showTable';
     console.log('table creation successfull');
   }
 

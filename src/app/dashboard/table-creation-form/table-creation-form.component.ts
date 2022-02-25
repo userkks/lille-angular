@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CommonService } from 'src/app/common/common.service';
 import { PopupService } from 'src/app/common/popup.service';
 
@@ -9,9 +10,8 @@ import { PopupService } from 'src/app/common/popup.service';
   styleUrls: ['./table-creation-form.component.css']
 })
 export class TableCreationFormComponent implements OnInit {
-  @Output() backToTableView: EventEmitter<any> = new EventEmitter(); 
 
-  constructor(private fb: FormBuilder, private popupService: PopupService, private commonService: CommonService) { }
+  constructor(private fb: FormBuilder, private popupService: PopupService, private commonService: CommonService, private router: Router) { }
 
   tableCreationForm: FormGroup;
   dataSaving = false;
@@ -146,7 +146,7 @@ export class TableCreationFormComponent implements OnInit {
   }
 
   backToTable(message) {
-    this.backToTableView.emit(message);
+    this.router.navigate(['dashboard', 'data-table']);
   }
 
 }
