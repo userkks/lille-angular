@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.apiPathValidationError = '';
       return;
     }
-    const validationRegex = /^[a-zA-Z0-9]+$/
+    const validationRegex = /^[a-zA-Z0-9]+$/;
     if (validationRegex.test(fieldValue)) {
       if (this.apiPathValidationSubscription && !this.apiPathValidationSubscription.closed) {
         this.apiPathValidationSubscription.unsubscribe();

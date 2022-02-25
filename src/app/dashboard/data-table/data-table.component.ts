@@ -17,4 +17,9 @@ export class DataTableComponent {
     this.componentState = 'createTable';
   }
 
+  backFromTableCreation() {
+    this.componentState = 'showTable';
+    console.log('table creation successfull');
+  }
+
 }

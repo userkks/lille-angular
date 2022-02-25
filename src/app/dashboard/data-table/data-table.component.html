@@ -10,5 +10,5 @@
         </button>
     </div>
     <div class="gap"></div>
-    <app-table-creation-form *ngIf="componentState === 'createTable'" class="default-width"></app-table-creation-form>
+    <app-table-creation-form (backToTableView)="backFromTableCreation(message)" *ngIf="componentState === 'createTable'" class="default-width"></app-table-creation-form>
 </div>

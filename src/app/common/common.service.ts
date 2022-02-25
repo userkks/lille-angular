@@ -112,4 +112,12 @@ export class CommonService {
   deleteUserApi(dataObj) {
     return this.http.post(`${this.baseUrl}/userApi/deleteUserApi`, dataObj, this.header);
   }
+
+  createNewTable(dataObj) {
+    return this.http.post(`${this.baseUrl}/userApi/createNewTable`, dataObj, this.header);
+  }
+
+  getAllTable() {
+    return this.http.get(`${this.baseUrl}/userApi/getAllTable`, this.header);
+  }
 }

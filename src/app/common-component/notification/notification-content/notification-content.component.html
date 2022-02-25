@@ -1,4 +1,4 @@
 <div class="notification-container"
-    [class]="{'notification-success': notificationConfiguration?.type === 'success'}">
+    [class]="{'notification-success': notificationConfiguration?.type === 'success', 'notification-error': notificationConfiguration?.type === 'error'}">
     {{notificationConfiguration?.message}}
 </div>
