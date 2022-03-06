@@ -203,3 +203,7 @@
 .api-list-link { 
   width: auto;
 }
+
+.create-table {
+  display: none;
+}

@@ -3,6 +3,7 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/common/common.service';
 import { PopupService } from 'src/app/common/popup.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-table-creation-form',
@@ -20,6 +21,7 @@ export class TableCreationFormComponent implements OnInit {
   allTableList = [];
 
   ngOnInit(): void {
+    if (!environment.profile) { this.router.navigate(['home']); return; }
     this.commonService.getAllTable().subscribe((res: any) => {
       this.allTableList = (res.length && res.map(item => item.apiKey)) || [];
     }, (error) => {

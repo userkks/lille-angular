@@ -6,3 +6,10 @@ export function checkIfErrorInputField(formDefinition, fieldName) {
         return false;
     }
 }
+
+export function commonGridFormatter(value) {
+    if (Array.isArray(value))
+        return value.join(", ");
+    else if (typeof value === 'object') return JSON.stringify(value);
+    return value;
+}

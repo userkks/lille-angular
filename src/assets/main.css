@@ -94,6 +94,16 @@ i {
   word-break: break-all;
 }
 
+table {
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid #c8c8c8;
+  padding: 8px;
+  text-align: left;
+}
+
 .form-field {
   margin: 8px 0px;
   display: flex;
@@ -1319,5 +1329,51 @@ app-popup-username {
 }
 
 .table-item:hover {
-  border: 2px solid #7e7e7e
+  border: 2px solid #7e7e7e;
+}
+
+.table-selected {
+  border: 2px solid #7e7e7e;
+}
+
+.left-column {
+  width: 190px;
+}
+
+.column-readonly {
+  border: 1px solid #c8c8c8;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  width: max-content;
+  margin: 5px;
+  max-width: 290px;
+}
+
+.accordion {
+  transition: max-height 0.5s;
+  overflow: hidden;
+  height: auto;
+}
+
+.accordion-button {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 3px;
+  padding: 12px 12px;
+  cursor: pointer;
+}
+
+.accordion-button-wrapper {
+  box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
+}
+
+.accordion-inner-container {
+  padding: 20px;
+  overflow: auto;
+}
+
+.api-table-container {
+  max-height: 500px;
+  overflow: auto;
 }

@@ -134,15 +134,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   editApi(editItem) {
-    this.apiFormState = 'edit';
-    this.resetFormState();
-    this.apiPath = editItem.key;
-    this.commonService.scrollToElment('createOrEditButton');
-    this.commonService.commonGetService(editItem.url).subscribe((res) => {
-      this.jsonField = JSON.stringify(res);
-    }, (error) => {
-      console.log(error);
-    })
+    if (editItem.type === 'POST') {
+      this.router.navigate(['dashboard', 'data-table']);
+    } else {
+      this.apiFormState = 'edit';
+      this.resetFormState();
+      this.apiPath = editItem.key;
+      this.commonService.scrollToElment('createOrEditButton');
+      this.commonService.commonGetService(editItem.url).subscribe((res) => {
+        this.jsonField = JSON.stringify(res);
+      }, (error) => {
+        console.log(error);
+      })
+    }
   }
 
   deleteApi(item) {
@@ -150,11 +154,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       open: true,
       type: 'confirmation',
       closeButton: true,
-      confirmationMessage: `This api "${item.url}" will be deleted. This action is not reversible.Do you want to continue?`,
+      confirmationMessage: `This api "${item.url}" and all it's data will be deleted. This action is not reversible.Do you want to continue?`,
       key: 'deleteConfirmation'
     }).subscribe((res: any) => {
       if (res.action === 'confirmed') {
-        this.subscription.add(this.commonService.deleteUserApi({ key: item.key }).subscribe((res) => {
+        this.subscription.add(this.commonService.deleteUserApi({ key: item.key, type: item.type }).subscribe((res) => {
           // here an alert need to be added on success
           this.popupService.openNotification({
             open: true,

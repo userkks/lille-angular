@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { removableStorageKeyList } from './common/appConstant';
 import { CommonService } from './common/common.service';
 import { CommunicationService } from './common/communication.service';
 
@@ -17,14 +16,16 @@ export class AppComponent implements OnInit {
 
   isSellerApp: Boolean = false;
   profile;
+  pathToTitleMapping = {
+    '/blog': 'Lille | Blog',
+    '/blog/simplifying-api-development-with-lille': 'Simplifying API development with Lille | Lille',
+    'default': 'Create API Instantly - Streamline Your Backend Development'
+  }
 
   ngOnInit(): void {
-    for (const eachKey of removableStorageKeyList) {
-      localStorage.removeItem(eachKey);
-    }
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.isSellerApp = event.url === '/seller';
+        document.title = this.pathToTitleMapping[event.url] || this.pathToTitleMapping.default;
       }
     });
     this.commonService.fetchProfile().subscribe((res: any) => {

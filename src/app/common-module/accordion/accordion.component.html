@@ -1,0 +1,14 @@
+<div class="full-width">
+    <div class="accordion-button-wrapper">
+        <div (click)="toggleAccordionState()" class="accordion-button font-4">
+            <div>Table Configuration Details</div>
+            <div style="font-weight: bold">{{accordionState === 'open' ? '&#8211;' : '+'}}</div>
+        </div>
+        <div [style]="{maxHeight: accordionState === 'open' ? content.clientHeight+'px' : '0px'}"
+            class="accordion">
+            <div #content class="accordion-inner-container">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+</div>

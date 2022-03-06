@@ -120,4 +120,9 @@ export class CommonService {
   getAllTable() {
     return this.http.get(`${this.baseUrl}/userApi/getAllTable`, this.header);
   }
+
+  getTableData(tableKey) {
+    return this.http.get(`${this.baseUrl}/userApi/getTableData/${tableKey}`, this.header);
+  }
+
 }

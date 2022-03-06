@@ -12,10 +12,74 @@
     <div class="gap"></div>
     <div *ngIf="allTableList.length" class="default-width">
         <div class="table-list-container">
-            <div *ngFor="let item of allTableList" class="table-item">
+            <div (click)="openTable(item)" *ngFor="let item of allTableList" class="table-item"
+                [ngClass]="{'table-selected': this.selectedTable?.apiKey === item.apiKey}">
                 <div class="font-4">{{ item.tableName }}</div>
                 <div>( {{item.apiKey}} )</div>
             </div>
         </div>
     </div>
+    <div class="gap"></div>
+    <!-- <app-accordion class="default-width"></app-accordion> -->
+    <app-accordion *ngIf="selectedTableSchema" class="default-width">
+        <div>
+            <div>
+                <span class="font-4">Table Name :</span>
+                <span> {{selectedTableSchema.tableName}}</span>
+            </div>
+            <div>
+                <span class="font-4">API Key : </span>
+                <span>{{selectedTableSchema.apiKey}}</span>
+            </div>
+            <div>
+                <span class="font-4">API Path : </span>
+                <span>{{ env.uiUrl+'/'+env.userApiRoot + '/'+ env.profile.userName + '/' +
+                    selectedTableSchema.apiKey}}</span>
+            </div>
+            <div>
+                <span class="font-4">API Type : </span>
+                <span>POST</span>
+            </div>
+            <div class="gap"></div>
+            <h5>Column List : </h5>
+            <div class="flex-wrap">
+                <div *ngFor="let column of selectedTableSchema.columnFormArray" class="column-readonly">
+                    <div>
+                        <span class="font-4">Column Name : </span>
+                        <span>{{column.columnName}}</span>
+                    </div>
+                    <div>
+                        <span class="font-4">Column Key : </span>
+                        <span>{{column.columnKey}}</span>
+                    </div>
+                    <div>
+                        <span class="font-4">Column Type : </span>
+                        <span>{{column.columnType}}</span>
+                    </div>
+                    <div>
+                        <span class="font-4">Default Value : </span>
+                        <span>{{column.columnType === 'Object' ? (column.defaultValue | json) :
+                            column.defaultValue}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-accordion>
+    <div class="gap"></div>
+    <div *ngIf="allTableList.length" style="color: green" class="font-4 default-width">*Select any table/row to get
+        details</div>
+    <div class="gap"></div>
+    <div *ngIf="showDataTable" class="default-width api-table-container">
+        <gui-grid (selectedRows)="rowSelect($event)" [source]="rowData" [columns]="columns"></gui-grid>
+    </div>
+    <div class="gap"></div>
+    <table *ngIf="selectedTableRow" class="default-width">
+        <tr *ngFor="let key of selectedRowKeyList">
+            <td class="left-column">
+                <div class="font-4">{{selectedTableColumnNameMapping[key]}}</div>
+                <div><i class="font-2">({{key}})</i></div>
+            </td>
+            <td>{{selectedTableRow[key] | json}}</td>
+        </tr>
+    </table>
 </div>
