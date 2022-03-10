@@ -35,7 +35,11 @@
                     </div>
                     <div class="error-message"
                         *ngIf="tableCreationForm.get('apiKey').touched && tableCreationForm.get('apiKey').errors">
-                        {{tableCreationForm.get('apiKey').errors.errorMessage}}</div>
+                        {{tableCreationForm.get('apiKey').errors.errorMessage}}
+                    </div>
+                    <div *ngIf="!tableCreationForm.get('apiKey').errors">
+                        <i class="previewItalics">Preview: POST: {{env.uiUrl}}/{{env.userApiRoot}}/{{env.profile.userName}}/{{tableCreationForm.get('apiKey').value}}</i>
+                    </div>
                 </div>
             </div>
             <div class="small-gap"></div>

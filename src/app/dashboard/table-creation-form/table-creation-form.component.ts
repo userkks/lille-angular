@@ -19,14 +19,25 @@ export class TableCreationFormComponent implements OnInit {
   dataTypeList = ['String', 'Number', 'Boolean', 'Object', 'Array'];
   submitButtonClicked = false;
   allTableList = [];
+  env = environment;
 
   ngOnInit(): void {
-    if (!environment.profile) { this.router.navigate(['home']); return; }
-    this.commonService.getAllTable().subscribe((res: any) => {
-      this.allTableList = (res.length && res.map(item => item.apiKey)) || [];
-    }, (error) => {
-      console.log(error);
-    } )
+    if (!environment.profile) {
+      this.router.navigate(['home']); return;
+    } else if (!environment.profile.userName) {
+      this.popupService.openPopup({
+        open: true,
+        type: "userName",
+        closeButton: false,
+        key: 'userNameRegistration'
+      });
+    } else {
+      this.commonService.getAllTable().subscribe((res: any) => {
+        this.allTableList = (res.length && res.map(item => item.apiKey)) || [];
+      }, (error) => {
+        console.log(error);
+      })
+    }
     this.tableCreationForm = this.fb.group({
       tableName: ['', Validators.required],
       apiKey: ['', [Validators.required, this.apiKeyValidation.bind(this)]],
@@ -133,7 +144,7 @@ export class TableCreationFormComponent implements OnInit {
 
   apiKeyValidation(control: FormControl) {
     if (control.value && !/^[a-zA-Z0-9]+$/.test(control.value)) return { errorMessage: 'Special Characters are not Allowed' }
-    if (control.value && this.allTableList.includes(control.value)) return {errorMessage: 'This Key is being used in some other table.'}
+    if (control.value && this.allTableList.includes(control.value)) return { errorMessage: 'This Key is being used in some other table.' }
     return null;
   }
 

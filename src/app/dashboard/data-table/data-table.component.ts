@@ -29,16 +29,26 @@ export class DataTableComponent implements OnInit {
   env = environment;
 
   ngOnInit(): void {
-    if (!this.env.profile) { this.router.navigate(['home']); return; };
-    this.subscription.add(this.commonService.getAllTable().subscribe((res: any) => {
-      this.allTableList = res;
-    }, (error) => {
-      console.log(error);
-      this.popupService.openNotification({
-        type: 'error',
-        message: 'Some error occurred.'
+    if (!this.env.profile) { 
+      this.router.navigate(['home']); return; 
+    } else if (!environment.profile.userName) {
+      this.popupService.openPopup({
+        open: true,
+        type: "userName",
+        closeButton: false,
+        key: 'userNameRegistration'
       });
-    }))
+    } else {
+      this.subscription.add(this.commonService.getAllTable().subscribe((res: any) => {
+        this.allTableList = res;
+      }, (error) => {
+        console.log(error);
+        this.popupService.openNotification({
+          type: 'error',
+          message: 'Some error occurred.'
+        });
+      }))
+    }
   }
 
   createDataTable() {

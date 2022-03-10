@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { CommonService } from 'src/app/common/common.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-popup-username',
@@ -16,6 +17,7 @@ export class PopupUsernameComponent implements OnInit, OnDestroy {
   userNameValidationError = '';
   userNameValidationSubscription: Subscription;
   userNameFieldValue = '';
+  env = environment;
 
   ngOnInit(): void {
   }

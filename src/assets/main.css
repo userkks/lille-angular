@@ -1377,3 +1377,7 @@ app-popup-username {
   max-height: 500px;
   overflow: auto;
 }
+
+.previewItalics {
+  font-size: 14px;
+}

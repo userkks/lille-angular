@@ -5,7 +5,7 @@
     <div style="font-size: 15px" class="align-center">
         <div *ngIf="!userNameValidationError && userNameFieldValue" class="align-center">
             <div>All of your api path will look like this -</div>
-            <i>http://localhost:4200/lil/{{userNameFieldValue}}/...</i>
+            <i>{{env.uiUrl}}/{{env.userApiRoot}}/{{userNameFieldValue}}/...</i>
         </div>
         <div class="error-message" *ngIf="userNameValidationError">{{userNameValidationError}}</div>
     </div>
