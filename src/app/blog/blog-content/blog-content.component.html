@@ -6,8 +6,8 @@
         <ng-container *ngFor="let item of blogPostDetails?.content">
             <p *ngIf="item.paragraph" [innerHtml]="item.paragraph"></p>
             <div *ngIf="item.image" class="container-box blog-image-container">
-                <img src="../../../assets/illust 2.png" alt="">
-                <div style="font-weight: 300; font-style: italic;">{{item.image.description}}</div>
+                <img src="{{item.image}}" alt="">
+                <div style="font-weight: 300; font-style: italic;">{{item.description}}</div>
             </div>
         </ng-container>
     </div>

@@ -5,7 +5,8 @@
             api path. Add response data. DONE !!</div>
         <div style="height: 20px"></div>
         <div>
-            <button (click)="scrollToApplication()" class="cart-button">Get Started for Free</button>
+            <a [routerLink]="profile ? ['/dashboard'] : ['/login']" style="width: max-content"
+                class="cart-button"><span>Get Started for Free</span></a>
         </div>
     </div>
     <div style="width: 30%; min-width: 360px;">

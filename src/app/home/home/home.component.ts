@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { CommonService } from 'src/app/common/common.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -21,12 +22,9 @@ export class HomeComponent implements OnInit {
   apiPathValidationError;
   jsonFieldValidationError;
   savingData = false;
+  profile = environment.profile;
 
   ngOnInit(): void {
-  }
-
-  scrollToApplication() {
-    window.scrollTo(0, 560);
   }
 
   saveApiData() {

@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   pathToTitleMapping = {
     '/blog': 'Lille | Blog',
     '/blog/simplifying-api-development-with-lille': 'Simplifying API development with Lille | Lille',
+    '/blog/how-to-develop-apis-without-prior-coding-knowledge': 'How to develop APIs without prior coding knowledge, with Lille | Lille',
     'default': 'Create API Instantly - Streamline Your Backend Development'
   }
 
